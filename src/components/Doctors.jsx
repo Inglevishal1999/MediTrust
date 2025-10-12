@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 function Doctors() {
+  const slider = useRef(null);
 
   const settings = {
     accessibility: true,
@@ -16,37 +17,34 @@ function Doctors() {
     slidesToScroll: 1,
     responsive: [
       {
-        breakpoint: 1023,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-        }
-      },
-
-      {
-        breakpoint: 768,
+        breakpoint: 1024, // tablet and small laptop
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2
-        }
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
       },
-
-
       {
-        breakpoint: 480,
+        breakpoint: 768, // mobile landscape
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          initialSlide: 2
-        }
-      }
-    ]
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 480, // small mobile
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+    ],
   };
-  
-  const slider = useRef(null);
 
   const data = [
     {
@@ -82,50 +80,62 @@ function Doctors() {
   ];
 
   return (
-    <div className="min-h-full flex flex-col justify-center lg:px-32 px-5 pt-16">
-      <div className="flex flex-col items-center lg:flex-row justify-between mb-10 lg:mb-0">
-        <div>
-          <h1 className="text-4xl font-semibold text-center lg:text-start">
+    <div className="min-h-full flex flex-col justify-center px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 pt-12 md:pt-16">
+      {/* Heading Section */}
+      <div className="flex flex-col items-center lg:flex-row justify-between gap-6 mb-10">
+        <div className="text-center lg:text-left">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-gray-800">
             Our Doctors
           </h1>
-          <p className="mt-2 text-center lg:text-start">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Necessitatibus praesentium similique tempora eveniet rem modi sed
-            inventore laudantium ipsum, aliquam iusto fugiat, porro expedita
-            quisquam error unde dolorem soluta dolor.
+          <p className="mt-3 text-gray-600 text-sm sm:text-base md:text-lg leading-relaxed">
+            Meet our team of highly qualified and experienced specialists
+            dedicated to providing the best healthcare services with care and
+            compassion.
           </p>
         </div>
-        <div className="flex gap-5 mt-4 lg:mt-0">
-          <button className="bg-[#d5f2ec] text-backgroundColor px-4 py-2 rounded-lg active:bg-[#ade9dc]"
-          onClick={() => slider.current.slickPrev()}>
-            <FaArrowLeft size={25} />
+
+        {/* Arrows */}
+        <div className="flex gap-4">
+          <button
+            className="bg-[#d5f2ec] hover:bg-[#ade9dc] text-backgroundColor p-3 rounded-lg transition-all"
+            onClick={() => slider.current.slickPrev()}
+          >
+            <FaArrowLeft size={20} />
           </button>
-          <button className="bg-[#d5f2ec] text-backgroundColor px-4 py-2 rounded-lg active:bg-[#ade9dc]"
-          onClick={() => slider.current.slickNext()}>
-            <FaArrowRight size={25} />
+          <button
+            className="bg-[#d5f2ec] hover:bg-[#ade9dc] text-backgroundColor p-3 rounded-lg transition-all"
+            onClick={() => slider.current.slickNext()}
+          >
+            <FaArrowRight size={20} />
           </button>
         </div>
       </div>
-      <div className="mt-5">
+
+      {/* Slider Section */}
+      <div className="mt-4">
         <Slider ref={slider} {...settings}>
-          {data.map((e, index) => {
-            return (
-              <div
-                key={index}
-                className="h-[350px] text-black rounded-xl shadow-[rgba(0,_0,_0,0.24)_0px_3px_8px] mb-2 cursor-pointer"
-              >
+          {data.map((e, index) => (
+            <div
+              key={index}
+              className="px-2 sm:px-3 md:px-4"
+            >
+              <div className="h-[320px] sm:h-[350px] md:h-[380px] text-black rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer bg-white">
                 <img
                   src={e.img}
                   alt="doctor"
-                  className="w-full h-60 object-cover rounded-t-xl"
+                  className="w-full h-52 sm:h-60 md:h-64 object-cover rounded-t-xl"
                 />
-                <div className="flex flex-col justify-center items-center pt-4">
-                  <h1 className="font-semibold text-xl">{e.name}</h1>
-                  <h3 className="pt-2">{e.specialties}</h3>
+                <div className="flex flex-col justify-center items-center pt-4 px-3">
+                  <h1 className="font-semibold text-lg sm:text-xl text-gray-800 text-center">
+                    {e.name}
+                  </h1>
+                  <h3 className="pt-2 text-gray-500 text-sm sm:text-base text-center">
+                    {e.specialties}
+                  </h3>
                 </div>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </Slider>
       </div>
     </div>
