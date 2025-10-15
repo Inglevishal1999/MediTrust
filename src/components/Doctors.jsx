@@ -5,6 +5,12 @@ import Slider from "react-slick";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import doc1 from "../assets/doc1.jpg";
+import doc2 from "../assets/doc2.jpg";
+import doc3 from "../assets/doc3.jpg";
+import doc4 from "../assets/doc4.jpg";
+import doc5 from "../assets/doc5.jpg";
+import doc6 from "../assets/doc6.jpg";
 
 function Doctors() {
   const slider = useRef(null);
@@ -50,35 +56,15 @@ function Doctors() {
 
   const data = [
     {
-      img: "/src/assets/doc1.jpg",
+      img: doc1,
       name: "Dr. Serena Mitchell",
       specialties: "Orthopedic Surgeon",
     },
-    {
-      img: "/src/assets/doc2.jpg",
-      name: "Dr. Julian Bennett",
-      specialties: "Cardiologist",
-    },
-    {
-      img: "/src/assets/doc3.jpg",
-      name: "Dr. Camila Rodriguez",
-      specialties: "Pediatrician",
-    },
-    {
-      img: "/src/assets/doc4.jpg",
-      name: "Dr. Victor Nguyen",
-      specialties: "Neurologist",
-    },
-    {
-      img: "/src/assets/doc5.jpg",
-      name: "Dr. Ethan Carter",
-      specialties: "Dermatologist",
-    },
-    {
-      img: "/src/assets/doc6.jpg",
-      name: "Dr. Olivia Martinez",
-      specialties: "Ophthalmologist",
-    },
+    { img: doc2, name: "Dr. Julian Bennett", specialties: "Cardiologist" },
+    { img: doc3, name: "Dr. Camila Rodriguez", specialties: "Pediatrician" },
+    { img: doc4, name: "Dr. Victor Nguyen", specialties: "Neurologist" },
+    { img: doc5, name: "Dr. Ethan Carter", specialties: "Dermatologist" },
+    { img: doc6, name: "Dr. Olivia Martinez", specialties: "Ophthalmologist" },
   ];
 
   return (
@@ -121,11 +107,14 @@ function Doctors() {
               <div className="h-[320px] sm:h-[350px] md:h-[380px] text-black rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer bg-white">
                 <LazyLoadImage
                   src={e.img}
-                  alt="doctor"
-                  effect="blur" // or "opacity", "black-and-white"
+                  alt={e.name}
+                  effect="blur"
                   className="w-full h-52 sm:h-60 md:h-64 object-cover rounded-t-xl"
+                  onError={(e) => {
+                    e.target.src =
+                      "https://via.placeholder.com/400x300?text=Doctor";
+                  }}
                 />
-
                 <div className="flex flex-col justify-center items-center pt-4 px-3">
                   <h1 className="font-semibold text-lg sm:text-xl text-gray-800 text-center">
                     {e.name}
