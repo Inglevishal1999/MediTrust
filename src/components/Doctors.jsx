@@ -3,6 +3,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 function Doctors() {
   const slider = useRef(null);
@@ -115,16 +117,15 @@ function Doctors() {
       <div className="mt-4">
         <Slider ref={slider} {...settings}>
           {data.map((e, index) => (
-            <div
-              key={index}
-              className="px-2 sm:px-3 md:px-4"
-            >
+            <div key={index} className="px-2 sm:px-3 md:px-4">
               <div className="h-[320px] sm:h-[350px] md:h-[380px] text-black rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer bg-white">
-                <img
+                <LazyLoadImage
                   src={e.img}
                   alt="doctor"
+                  effect="blur" // or "opacity", "black-and-white"
                   className="w-full h-52 sm:h-60 md:h-64 object-cover rounded-t-xl"
                 />
+
                 <div className="flex flex-col justify-center items-center pt-4 px-3">
                   <h1 className="font-semibold text-lg sm:text-xl text-gray-800 text-center">
                     {e.name}
